@@ -259,7 +259,7 @@ public enum Champions
 	 *
 	 * @return whether or not the champion will have a hex core in his build
 	 */
-	public boolean hasHexCore()
+	public boolean getHasHexCore()
 	{
 		return this.hasHexCore;
 	}
