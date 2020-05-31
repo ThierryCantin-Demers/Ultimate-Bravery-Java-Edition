@@ -245,6 +245,26 @@ public enum Champions
 
 	
 	/**
+	 * Returns whether or not the champion will have boots in his build
+	 * 
+	 * @return whether or not the champion will have boots in his build
+	 */
+	public boolean getHasBoots()
+	{
+		return this.hasBoots;
+	}
+	
+	/**
+	 * Returns whether or not the champion will have a hex core in his build
+	 *
+	 * @return whether or not the champion will have a hex core in his build
+	 */
+	public boolean hasHexCore()
+	{
+		return this.hasHexCore;
+	}
+	
+	/**
 	 * Changes whether the champion will have boots or not in his build
 	 */
 	private void setHasBoots()
