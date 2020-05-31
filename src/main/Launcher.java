@@ -3,7 +3,7 @@ package main;
 import structure.Champions;
 import structure.Maps;
 
-public class main
+public class Launcher
 {
 	
 	static Champions[] champions = InitializeStructure.createChampionsArray();
