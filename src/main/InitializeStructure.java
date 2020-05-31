@@ -18,11 +18,9 @@ public class InitializeStructure
 	}
 	
 	
-	public static Items[] createItemsArray(Maps map)
+	public static Items[] createItemsArray()
 	{
-		
-		
-		return null;
+		return Items.values();
 	}
 
 }
