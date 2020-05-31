@@ -112,19 +112,10 @@ public enum Champions
 	private static final String BACKGROUND_PATH = PATH + "background\\";
 
 	/**
-	 * The path for the champion's Q spell
+	 * The path for the champion's spells
 	 */
-	private static final String Q_SPELL_PATH = PATH + "spells\\Q\\";
+	private static final String SPELL_PATH = PATH + "spells\\";
 
-	/**
-	 * The path for the champion's W spell
-	 */
-	private static final String W_SPELL_PATH = PATH + "spells\\W\\";
-
-	/**
-	 * The path for the champion's E spell
-	 */
-	private static final String E_SPELL_PATH = PATH + "spells\\E\\";
 
 	/**
 	 * The name of the champion
@@ -151,6 +142,16 @@ public enum Champions
 	 * champion selection
 	 */
 	private boolean selected;
+	
+	/**
+	 * Indicated whether or not the champion will have boots in his build
+	 */
+	private boolean hasBoots;
+	
+	/**
+	 * Indicates whether or not the champion will have a hex core in his build
+	 */
+	private boolean hasHexCore;
 
 	/**
 	 * Creates a new champion
@@ -170,6 +171,8 @@ public enum Champions
 		
 		this.selected = true;
 		
+		setHasBoots();
+		setHasHexCore();
 	}
 
 	/**
@@ -179,9 +182,15 @@ public enum Champions
 	{
 		imagePaths.put("icon", ICON_PATH + imgName);
 		imagePaths.put("background", BACKGROUND_PATH + imgName);
-		imagePaths.put("qSpell", Q_SPELL_PATH + imgName);
-		imagePaths.put("wSpell", W_SPELL_PATH + imgName);
-		imagePaths.put("eSpell", E_SPELL_PATH + imgName);
+		
+		this.imgName = getName() + "Q.png";
+		imagePaths.put("qSpell", SPELL_PATH + imgName);
+		
+		this.imgName = getName() + "W.png";
+		imagePaths.put("wSpell", SPELL_PATH + imgName);
+		
+		this.imgName = getName() + "E.png";
+		imagePaths.put("eSpell", SPELL_PATH + imgName);
 	}
 
 	/**
@@ -232,6 +241,30 @@ public enum Champions
 	public void setSelected(boolean selected)
 	{
 		this.selected = selected;
+	}
+
+	
+	/**
+	 * Changes whether the champion will have boots or not in his build
+	 */
+	private void setHasBoots()
+	{
+		if(getName().equals("Cassiopeia"))
+			this.hasBoots = false;
+		else
+			this.hasBoots = true;
+	}
+	
+
+	/**
+	 * Changes whether the champion will have a hex core or not in his build
+	 */
+	private void setHasHexCore()
+	{
+		if(getName().equals("Viktor"))
+			this.hasHexCore = true;
+		else
+			this.hasHexCore = false;
 	}
 
 	/**
