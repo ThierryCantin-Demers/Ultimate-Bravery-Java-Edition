@@ -20,6 +20,8 @@ public class InitializeStructure
 	
 	public static Items[] createItemsArray(Maps map)
 	{
+		
+		
 		return null;
 	}
 

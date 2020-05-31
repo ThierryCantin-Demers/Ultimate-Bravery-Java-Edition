@@ -1,8 +1,5 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import structure.Champions;
 import structure.Maps;
 
@@ -17,7 +14,7 @@ public class main
 	public static void main(String[] args)
 	{
 		
-		
+		System.out.println("haha");
 	}
 
 }
