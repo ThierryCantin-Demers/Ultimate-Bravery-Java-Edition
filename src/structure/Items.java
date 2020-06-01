@@ -84,11 +84,6 @@ public enum Items
 	private String name;
 
 	/**
-	 * Range type of the item
-	 */
-	private RangeType rangeType;
-
-	/**
 	 * Name of the image of the item
 	 */
 	private String imgName;
@@ -109,8 +104,6 @@ public enum Items
 		this.name = name;
 		this.imgName = name = ".png";
 		setPath();
-
-		setRangeType();
 	}
 
 	/**
@@ -141,38 +134,6 @@ public enum Items
 		return this.name;
 	}
 
-	/**
-	 * Returns the range type of the item
-	 * 
-	 * @return the range type of the item
-	 */
-	public RangeType getRangeType()
-	{
-		return this.rangeType;
-	}
-
-	/**
-	 * Sets the range type for the item (ranged if the item is Runaan's
-	 * Hurricane, melee if the item is Ravenous Hydra or Titanic Hydra, and
-	 * mixed if it is any other item
-	 */
-	private void setRangeType()
-	{
-		ArrayList<String> rangedOnly = new ArrayList<>();
-		rangedOnly.add("Runaan's Hurricane");
-
-		ArrayList<String> meleeOnly = new ArrayList<>();
-		meleeOnly.add("Titanic Hydra");
-		meleeOnly.add("Ravenous Hydra");
-
-		if (rangedOnly.contains(getName()))
-			this.rangeType = RangeType.RANGED;
-		else
-			if (meleeOnly.contains(getName()))
-				this.rangeType = RangeType.MELEE;
-			else
-				this.rangeType = RangeType.MIXED;
-	}
 
 	/**
 	 * Returns the name of the item
