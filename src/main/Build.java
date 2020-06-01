@@ -67,7 +67,7 @@ public class Build
 	
 	public List<?> generateBuild()
 	{
-		List<Items> build = new ArrayList<>();
+		List<?> build = new ArrayList<>();
 		
 		if(champion.getHasBoots())
 		{
