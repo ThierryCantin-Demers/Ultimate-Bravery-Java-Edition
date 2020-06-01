@@ -1,9 +1,7 @@
 package structure;
 
-public enum Maps
+public class Map
 {
-	SUMMONERS_RIFT("Summoner's Rift"), HOWLING_ABYSS("Howling Abyss"), URF("URF");
-	
 	/**
 	 * Name of the map
 	 */
@@ -20,7 +18,7 @@ public enum Maps
 	 * 
 	 * @param name : name of the map
 	 */
-	private Maps(String name)
+	private Map(String name)
 	{
 		this.name = name;
 		
