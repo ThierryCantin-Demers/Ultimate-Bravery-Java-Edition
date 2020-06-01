@@ -77,7 +77,6 @@ public enum Champions
 	MAOKAI("Maokai", RangeType.MELEE),
 	MASTER_YI("Master Yi", RangeType.MELEE),
 	MISS_FORTUNE("Miss Fortune", RangeType.RANGED),
-	WUKONG("Wukong", RangeType.MELEE),
 	MORDEKAISER("Mordekaiser", RangeType.MELEE),
 	MORGANA("Morgana", RangeType.RANGED),
 	NAMI("Nami", RangeType.RANGED),
@@ -92,7 +91,67 @@ public enum Champions
 	ORNN("Ornn", RangeType.MELEE),
 	PANTHEON("Pantheon", RangeType.MELEE),
 	POPPY("Poppy", RangeType.MELEE),
-	PYKE("Pyke", RangeType.MELEE)
+	PYKE("Pyke", RangeType.MELEE),
+	QIYANA("Qiyana", RangeType.MELEE),
+	QUINN("Quinn", RangeType.RANGED),
+	RAKAN("Rakan", RangeType.MELEE),
+	RAMMUS("Rammus", RangeType.MELEE),
+	REK_SAI("Rek'Sai", RangeType.MELEE),
+	RENEKTON("Renekton", RangeType.MELEE),
+	RENGAR("Rengar", RangeType.MELEE),
+	RIVEN("Riven", RangeType.MELEE),
+	RUMBLE("Rumble", RangeType.MELEE),
+	RYZE("Ryze", RangeType.RANGED),
+	SEJUANI("Sejuani", RangeType.MELEE),
+	SENNA("Senna", RangeType.RANGED),
+	SETT("Sett", RangeType.MELEE),
+	SHACO("Shaco", RangeType.MELEE),
+	SHEN("Shen", RangeType.MELEE),
+	SHYVANA("Shyvana", RangeType.MELEE),
+	SINGED("Singed", RangeType.MELEE),
+	SION("Sion", RangeType.MELEE),
+	SIVIR("Sivir", RangeType.RANGED),
+	SKARNER("Skarner", RangeType.MELEE),
+	SONA("Sona", RangeType.RANGED),
+	SORAKA("Soraka", RangeType.RANGED),
+	SWAIN("Swain", RangeType.RANGED),
+	SYLAS("Sylas", RangeType.MELEE),
+	SYNDRA("Syndra", RangeType.RANGED),
+	TAHM_KENCH("Tahm Kench", RangeType.MELEE),
+	TALIYAH("Taliyah", RangeType.RANGED),
+	TALON("Talon", RangeType.MELEE),
+	TARIC("Taric", RangeType.MELEE),
+	TEEMO("Teemo", RangeType.RANGED),
+	THRESH("Thresh", RangeType.RANGED),
+	TRISTANA("Tristana", RangeType.RANGED),
+	TRUNDLE("Trundle", RangeType.MELEE),
+	TRYNDAMERE("Tryndamere", RangeType.MELEE),
+	TWISTED_FATE("Twisted Fate", RangeType.RANGED),
+	TWITCH("Twitch", RangeType.RANGED),
+	UDYR("Udyr", RangeType.MELEE),
+	URGOT("Urgot", RangeType.RANGED),
+	VARUS("Varus", RangeType.RANGED),
+	VAYNE("Vayne", RangeType.RANGED),
+	VEIGAR("Veigar", RangeType.RANGED),
+	VEL_KOZ("Vel'Koz", RangeType.RANGED),
+	VI("Vi", RangeType.MELEE),
+	VIKTOR("Viktor", RangeType.RANGED),
+	VLADIMIR("Vladimir", RangeType.RANGED),
+	VOLIBEAR("Volibear", RangeType.MELEE),
+	WARWICK("Warwick", RangeType.MELEE),
+	WUKONG("Wukong", RangeType.MELEE),
+	XAYAH("Xayah", RangeType.RANGED),
+	XERATH("Xerath", RangeType.RANGED),
+	XIN_ZAOH("Xin Zaoh", RangeType.MELEE),
+	YASUO("Yasuo", RangeType.MELEE),
+	YORICK("Yorick", RangeType.MELEE),
+	YUUMI("Yuumi", RangeType.RANGED),
+	ZAC("Zac", RangeType.MELEE),
+	ZED("Zed", RangeType.MELEE),
+	ZIGGS("Ziggs", RangeType.RANGED),
+	ZILEAN("Zilean", RangeType.RANGED),
+	ZOE("Zoe", RangeType.RANGED),
+	ZYRA("Zyra", RangeType.RANGED)
 
 	;
 
@@ -115,7 +174,6 @@ public enum Champions
 	 * The path for the champion's spells
 	 */
 	private static final String SPELL_PATH = PATH + "spells\\";
-
 
 	/**
 	 * The name of the champion
@@ -142,12 +200,12 @@ public enum Champions
 	 * champion selection
 	 */
 	private boolean selected;
-	
+
 	/**
 	 * Indicated whether or not the champion will have boots in his build
 	 */
 	private boolean hasBoots;
-	
+
 	/**
 	 * Indicates whether or not the champion will have a hex core in his build
 	 */
@@ -168,9 +226,9 @@ public enum Champions
 
 		this.imagePaths = new HashMap<>();
 		setImagePaths();
-		
+
 		this.selected = true;
-		
+
 		setHasBoots();
 		setHasHexCore();
 	}
@@ -182,13 +240,13 @@ public enum Champions
 	{
 		imagePaths.put("icon", ICON_PATH + imgName);
 		imagePaths.put("background", BACKGROUND_PATH + imgName);
-		
+
 		this.imgName = getName() + "Q.png";
 		imagePaths.put("qSpell", SPELL_PATH + imgName);
-		
+
 		this.imgName = getName() + "W.png";
 		imagePaths.put("wSpell", SPELL_PATH + imgName);
-		
+
 		this.imgName = getName() + "E.png";
 		imagePaths.put("eSpell", SPELL_PATH + imgName);
 	}
@@ -222,19 +280,22 @@ public enum Champions
 	{
 		return imagePaths;
 	}
-	
+
 	/**
-	 * Returns if the chmapion is selected or not for the random champion selection
+	 * Returns if the chmapion is selected or not for the random champion
+	 * selection
 	 * 
-	 * @return if the chmapion is selected or not for the random champion selection
+	 * @return if the chmapion is selected or not for the random champion
+	 *         selection
 	 */
 	public boolean getSelected()
 	{
 		return this.selected;
 	}
-	
+
 	/**
-	 * Changes if the champion is selected or not for the random champion selection
+	 * Changes if the champion is selected or not for the random champion
+	 * selection
 	 * 
 	 * @param selected : The new state of the champion's selection
 	 */
@@ -243,7 +304,6 @@ public enum Champions
 		this.selected = selected;
 	}
 
-	
 	/**
 	 * Returns whether or not the champion will have boots in his build
 	 * 
@@ -253,7 +313,7 @@ public enum Champions
 	{
 		return this.hasBoots;
 	}
-	
+
 	/**
 	 * Returns whether or not the champion will have a hex core in his build
 	 *
@@ -263,32 +323,31 @@ public enum Champions
 	{
 		return this.hasHexCore;
 	}
-	
+
 	/**
 	 * Changes whether the champion will have boots or not in his build
 	 */
 	private void setHasBoots()
 	{
-		if(getName().equals("Cassiopeia"))
+		if (getName().equals("Cassiopeia"))
 			this.hasBoots = false;
 		else
 			this.hasBoots = true;
 	}
-	
 
 	/**
 	 * Changes whether the champion will have a hex core or not in his build
 	 */
 	private void setHasHexCore()
 	{
-		if(getName().equals("Viktor"))
+		if (getName().equals("Viktor"))
 			this.hasHexCore = true;
 		else
 			this.hasHexCore = false;
 	}
 
 	/**
-	 * Return the attributes of the champion : name, RangeType, selected 
+	 * Return the attributes of the champion : name, RangeType, selected
 	 * 
 	 * @return the name of the champion
 	 */
