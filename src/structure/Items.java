@@ -1,7 +1,5 @@
 package structure;
 
-import java.util.ArrayList;
-
 /**
  * Enum containing all the full items
  * 
@@ -133,7 +131,6 @@ public enum Items
 	{
 		return this.name;
 	}
-
 
 	/**
 	 * Returns the name of the item

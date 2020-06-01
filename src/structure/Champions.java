@@ -266,7 +266,7 @@ public enum Champions
 	 * 
 	 * @return the range type of the champion
 	 */
-	public RangeType getRange()
+	public RangeType getRangeType()
 	{
 		return rangeType;
 	}
