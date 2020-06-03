@@ -5,24 +5,26 @@ import java.util.Arrays;
 import java.util.List;
 
 import structure.Boots;
-import structure.Champions;
+import structure.Champion;
+import structure.Item;
 import structure.Items;
 import structure.Machete;
+import structure.Map;
 import structure.Maps;
 import structure.RangeType;
 
 public class Build
 {
 	private List<?> build;
-	private List<Items> items;
+	private List<Item> items;
 	private List<Boots> boots;
 	private List<Machete> machete;
-	private Champions champion;
-	private Maps map;
+	private Champion champion;
+	private Map map;
 
-	public Build(Champions champion, Maps map)
+	public Build(Champion champion, Map map)
 	{
-		this.items = Arrays.asList(InitializeStructure.createItemsArray());
+		this.items = InitializeStructure.createItemsArrayList();
 		removeItems();
 		
 		this.boots = Arrays.asList(InitializeStructure.createBootsArray());
@@ -42,24 +44,24 @@ public class Build
 	{
 		if (champion.getRangeType().equals(RangeType.MELEE))
 		{
-			items.remove(Items.TITANIC_HYDRA);
-			items.remove(Items.RAVENOUS_HYDRA);
+			items.remove();
+			items.remove();
 		}
 		else
 			if (champion.getRangeType().equals(RangeType.RANGED))
 			{
-				items.remove(Items.RUNAAN_S_HURRICANE);
+				items.remove();
 			}
 	}
 
 	private void removeItemsFromMap()
 	{
-		if (map.equals(Maps.SUMMONERS_RIFT))
+		if (map.equals())
 		{
 
 		}
 		else
-			if (map.equals(Maps.HOWLING_ABYSS))
+			if (map.equals())
 			{
 
 			}

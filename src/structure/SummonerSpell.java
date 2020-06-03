@@ -34,7 +34,7 @@ public class SummonerSpell
 	 * @param usableInMap : a list of Map in which you can take the summoner
 	 *            spell
 	 */
-	private SummonerSpell(String name, Map[] usableInMap)
+	public SummonerSpell(String name, Map[] usableInMap)
 	{
 		this.name = name;
 		this.usableInMaps = usableInMap;

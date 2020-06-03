@@ -18,7 +18,7 @@ public class Map
 	 * 
 	 * @param name : name of the map
 	 */
-	private Map(String name)
+	public Map(String name)
 	{
 		this.name = name;
 		

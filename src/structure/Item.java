@@ -28,7 +28,7 @@ public class Item
 	 * @param name : name of the item
 	 * @param rangeType : range type of the item
 	 */
-	private Item(String name)
+	public Item(String name)
 	{
 		this.name = name;
 		this.imgName = name = ".png";
@@ -38,7 +38,7 @@ public class Item
 	/**
 	 * Sets the path of the item's image
 	 */
-	private void setPath()
+	protected void setPath()
 	{
 		this.imgPath = PATH + imgName;
 	}
@@ -61,6 +61,16 @@ public class Item
 	public String getName()
 	{
 		return this.name;
+	}
+	
+	/**
+	 * Returns the name of the image of the item
+	 * 
+	 * @return the name of the image of the item
+	 */
+	public String getImgName()
+	{
+		return this.imgName;
 	}
 
 	/**

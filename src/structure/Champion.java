@@ -66,7 +66,7 @@ public class Champion
 	 * @param name : The name of the champion
 	 * @param range : The range type of the champion
 	 */
-	private Champion(String name, RangeType rangeType)
+	public Champion(String name, RangeType rangeType)
 	{
 		this.name = name;
 		this.imgName = getName() + ".png";
