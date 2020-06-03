@@ -5,7 +5,7 @@ public class Item
 	/**
 	 * Path of the items' images
 	 */
-	private static String PATH = "images\\items\\";
+	private String PATH = "image\\items\\";
 
 	/**
 	 * Name of the item
@@ -30,17 +30,18 @@ public class Item
 	 */
 	public Item(String name)
 	{
+		
 		this.name = name;
-		this.imgName = name = ".png";
-		setPath();
+		this.imgName = name + ".png";
+		setPath(PATH);
 	}
 
 	/**
 	 * Sets the path of the item's image
 	 */
-	protected void setPath()
+	protected void setPath(String path)
 	{
-		this.imgPath = PATH + imgName;
+		this.imgPath = path + imgName;
 	}
 
 	/**

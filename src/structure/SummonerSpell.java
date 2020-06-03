@@ -13,11 +13,6 @@ public class SummonerSpell
 	private String name;
 
 	/**
-	 * The list of Map in which you can take the summoner spell
-	 */
-	private Map[] usableInMaps;
-
-	/**
 	 * The name of the image of the summoner spell
 	 */
 	private String imgName;
@@ -34,10 +29,9 @@ public class SummonerSpell
 	 * @param usableInMap : a list of Map in which you can take the summoner
 	 *            spell
 	 */
-	public SummonerSpell(String name, Map[] usableInMap)
+	public SummonerSpell(String name)
 	{
 		this.name = name;
-		this.usableInMaps = usableInMap;
 
 		this.imgName = getName() + ".png";
 		this.imgPath = PATH + imgName;
@@ -54,16 +48,6 @@ public class SummonerSpell
 	}
 
 	/**
-	 * Returns the Map in which you can take the summoner spell
-	 * 
-	 * @return the Map in which you can take the summoner spell
-	 */
-	public Map[] usableInMap()
-	{
-		return usableInMaps;
-	}
-
-	/**
 	 * Returns the path of the image of the summoner spell
 	 * 
 	 * @return the path of the image of the summoner spell
@@ -73,6 +57,25 @@ public class SummonerSpell
 		return imgPath;
 	}
 
+	
+	@Override
+	public boolean equals(Object o)
+	{
+		boolean equal = false;
+		
+		if(o instanceof SummonerSpell)
+		{
+			SummonerSpell summSpell = (SummonerSpell) o;
+			
+			if(this.getName().equals(summSpell.getName()))
+			{
+				equal = true;
+			}
+		}
+
+		return equal;
+	}
+	
 	/**
 	 * Returns the name of the summoner spell
 	 * 

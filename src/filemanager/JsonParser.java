@@ -1,7 +1,6 @@
 package filemanager;
 
 import java.io.FileReader;
-import java.util.HashMap;
 import java.util.TreeMap;
 
 import org.json.simple.JSONObject;

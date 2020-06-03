@@ -8,8 +8,6 @@ public class Boots extends Item
 	private static final String PATH = "image\\items\\boots\\";
 
 	
-	
-	
 	/**
 	 * Creates a new boot item
 	 * 
@@ -18,8 +16,7 @@ public class Boots extends Item
 	public Boots(String name)
 	{
 		super(name);
-		
-		setPath();
+		super.setPath(PATH);
 	}
 
 }

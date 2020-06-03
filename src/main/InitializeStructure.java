@@ -2,9 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SortedSet;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import exceptions.ParsingException;
 import filemanager.JsonParser;
@@ -14,6 +12,7 @@ import structure.Item;
 import structure.Machete;
 import structure.Map;
 import structure.RangeType;
+import structure.SummonerSpell;
 
 public class InitializeStructure
 {
@@ -25,19 +24,19 @@ public class InitializeStructure
 		List<Champion> champions = new ArrayList<>();
 		RangeType range = null;
 		
-		TreeMap<String, String> championsHashMap = JsonParser.parseJSON(DATA_PATH + "champions.json");
+		TreeMap<String, String> championsTreeMap = JsonParser.parseJSON(DATA_PATH + "champions.json");
 		
-		for(String name: championsHashMap.keySet())
+		for(String name: championsTreeMap.keySet())
 		{
-			if(championsHashMap.get(name).equals("Melee"))
+			if(championsTreeMap.get(name).equals("Melee"))
 			{
 				range = RangeType.MELEE;
 			}
-			else if(championsHashMap.get(name).equals("Ranged"))
+			else if(championsTreeMap.get(name).equals("Ranged"))
 			{
 				range = RangeType.RANGED;
 			}
-			else if(championsHashMap.get(name).equals("Mixed"))
+			else if(championsTreeMap.get(name).equals("Mixed"))
 			{
 				range = RangeType.MIXED;
 			}
@@ -54,36 +53,77 @@ public class InitializeStructure
 
 	public static ArrayList<Map> createMapsArrayList()
 	{
-		return null;
+		TreeMap<String, String> mapsTreeMap = JsonParser.parseJSON(DATA_PATH + "maps.json"); 
+		
+		List<Map> maps = new ArrayList<>();
+		
+		for(String name: mapsTreeMap.keySet())
+		{
+			maps.add(new Map(name));
+		}
+		
+		
+		return (ArrayList<Map>) maps;
 	}
 
 	public static ArrayList<Item> createItemsArrayList()
 	{
-		List<Item> items = 
+		TreeMap<String, String> itemsTreeMap = JsonParser.parseJSON(DATA_PATH + "items.json"); 
 		
-		return null;
+		List<Item> items = new ArrayList<>();
+		
+		for(String name: itemsTreeMap.keySet())
+		{
+			items.add(new Item(name));
+		}
+		
+		
+		return (ArrayList<Item>) items;
 	}
 	
-	public static SortedSet<Boots> createBootsArrayList()
+	public static ArrayList<Boots> createBootsArrayList()
 	{
-		SortedSet<Boots> boots = new TreeSet<>();
+		TreeMap<String, String> bootsTreeMap = JsonParser.parseJSON(DATA_PATH + "boots.json"); 
 		
-		boots.add(new Boots("Berserker's Greaves"));
-		boots.add(new Boots("Boots of Mobility"));
-		boots.add(new Boots("Boots of Swiftness"));
-		boots.add(new Boots("Ionian's Boots of Lucidity"));
-		boots.add(new Boots("Mercury's Treads"));
-		boots.add(new Boots("Ninja Tabi"));
-		boots.add(new Boots("Sorcerer's Shoes"));
+		List<Boots> boots = new ArrayList<>();
 		
-		return boots;
+		for(String name: bootsTreeMap.keySet())
+		{
+			boots.add(new Boots(name));
+		}
+		
+		
+		return (ArrayList<Boots>) boots;
 	}
 	
 	public static ArrayList<Machete> createMacheteArrayList()
 	{
-		return null;
+		TreeMap<String, String> macheteTreeMap = JsonParser.parseJSON(DATA_PATH + "machetes.json"); 
+		
+		List<Machete> machetes = new ArrayList<>();
+		
+		for(String name: macheteTreeMap.keySet())
+		{
+			machetes.add(new Machete(name));
+		}
+		
+		
+		return (ArrayList<Machete>) machetes;
+
 	}
 	
-	
+	public static ArrayList<SummonerSpell> createSummonerSpellArrayList()
+	{
+		TreeMap<String, String> summSpellsTreeMap = JsonParser.parseJSON(DATA_PATH + "summoner spells.json");
+		
+		List<SummonerSpell> summSpells = new ArrayList<>();
+		
+		for(String name: summSpellsTreeMap.keySet())
+		{
+			summSpells.add(new SummonerSpell(name));
+		}
+		
+		return (ArrayList<SummonerSpell>) summSpells;
+	}
 
 }
