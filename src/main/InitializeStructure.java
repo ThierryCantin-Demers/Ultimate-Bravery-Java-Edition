@@ -3,15 +3,20 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import exceptions.ParsingException;
 import filemanager.JsonParser;
 import structure.Boots;
 import structure.Champion;
 import structure.Item;
+import structure.Keystone;
 import structure.Machete;
 import structure.Map;
+import structure.MinorRune;
 import structure.RangeType;
+import structure.RuneType;
+import structure.StatRune;
 import structure.SummonerSpell;
 
 public class InitializeStructure
@@ -124,6 +129,87 @@ public class InitializeStructure
 		}
 		
 		return (ArrayList<SummonerSpell>) summSpells;
+	}
+	
+	public static ArrayList<RuneType> createRuneTypeArrayList() throws ParsingException
+	{
+		TreeMap<String, TreeMap<String, String>> runeTypesTreeMap = JsonParser.parseRunesJSON(DATA_PATH + "runes.json");
+		
+		List<RuneType> runeTypes = new ArrayList<>();
+		
+		List<Keystone> keystones = new ArrayList<>();
+		List<List<MinorRune>> minorRunes = new ArrayList<>();
+		minorRunes.add(new ArrayList<>());
+		minorRunes.add(new ArrayList<>());
+		minorRunes.add(new ArrayList<>());
+		
+		
+		for(String runeType : runeTypesTreeMap.keySet())
+		{
+			for(String runeName : runeTypesTreeMap.get(runeType).keySet())
+			{
+				if(runeTypesTreeMap.get(runeType).get(runeName).equals("keystone"))
+				{
+					keystones.add(new Keystone(runeName));
+				}
+				else if(runeTypesTreeMap.get(runeType).get(runeName).equals("minor1"))
+				{
+					minorRunes.get(0).add(new MinorRune(runeName));
+				}
+				else if(runeTypesTreeMap.get(runeType).get(runeName).equals("minor2"))
+				{
+					minorRunes.get(1).add(new MinorRune(runeName));
+				}
+				else if(runeTypesTreeMap.get(runeType).get(runeName).equals("minor3"))
+				{
+					minorRunes.get(2).add(new MinorRune(runeName));
+				}
+				else
+				{
+					throw new ParsingException("invalid rune");
+				}
+				
+			}
+			
+			runeTypes.add(new RuneType(runeType, new ArrayList<>(keystones), new ArrayList<>(minorRunes.stream().map(x -> new ArrayList<>(x)).collect(Collectors.toList()))));
+			
+			keystones.clear();
+			minorRunes.get(0).clear();
+			minorRunes.get(1).clear();
+			minorRunes.get(2).clear();
+		}
+		
+		return (ArrayList<RuneType>) runeTypes;
+	}
+	
+	public static ArrayList<ArrayList<StatRune>> createStatRune2DArrayList()
+	{
+		TreeMap<String, String> statRunesTreeMap = JsonParser.parseJSON(DATA_PATH + "stat runes.json");
+		
+		ArrayList<ArrayList<StatRune>> statRunes = new ArrayList<>();
+		
+		statRunes.add(new ArrayList<>());
+		statRunes.add(new ArrayList<>());
+		statRunes.add(new ArrayList<>());
+		
+		for(String category: statRunesTreeMap.keySet())
+		{
+			if(category.startsWith("Offense"))
+			{
+				statRunes.get(0).add(new StatRune(statRunesTreeMap.get(category)));
+			}
+			else if(category.startsWith("Flex"))
+			{
+				statRunes.get(1).add(new StatRune(statRunesTreeMap.get(category)));
+			}
+			else if(category.startsWith("Defense"))
+			{
+				statRunes.get(2).add(new StatRune(statRunesTreeMap.get(category)));
+			}
+		}
+		
+		
+		return statRunes;
 	}
 
 }

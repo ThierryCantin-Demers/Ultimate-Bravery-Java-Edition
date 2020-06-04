@@ -5,7 +5,7 @@ public class Machete extends Item
 	/**
 	 * The base path of all the machete's images' path
 	 */
-	private static final String PATH = "image\\items\\machete\\";
+	private static final String PATH = "images\\items\\machete\\";
 
 	/**
 	 * Creates a new machete item

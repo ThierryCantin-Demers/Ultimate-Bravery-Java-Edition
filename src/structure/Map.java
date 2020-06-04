@@ -58,4 +58,10 @@ public class Map
 	{
 		return this.selected;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return this.getName();
+	}
 }

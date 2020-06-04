@@ -3,12 +3,17 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.ParsingException;
 import structure.Boots;
 import structure.Champion;
 import structure.Item;
 import structure.Machete;
 import structure.Map;
+import structure.MinorRune;
 import structure.RangeType;
+import structure.RunePage;
+import structure.RuneType;
+import structure.StatRune;
 import structure.SummonerSpell;
 
 public class Build
@@ -16,16 +21,20 @@ public class Build
 	private List<Item> build;
 	private List<SummonerSpell> summsToPick;
 	private String spellToMax;
+	private RunePage runePage;
 
 	private List<Item> items;
 	private Item hexCore;
 	private List<Boots> boots;
 	private List<Machete> machetes;
 	private List<SummonerSpell> summSpells;
+	private List<RuneType> runeTypes;
+	private ArrayList<ArrayList<StatRune>> statRunes;
+
 	private Champion champion;
 	private Map map;
 
-	public Build(Champion champion, Map map)
+	public Build(Champion champion, Map map) throws ParsingException
 	{
 		this.hexCore = new Item("Perfect Hex Core");
 
@@ -41,11 +50,87 @@ public class Build
 		this.summSpells = InitializeStructure.createSummonerSpellArrayList();
 		removeSummonerSpells();
 
+		this.runeTypes = InitializeStructure.createRuneTypeArrayList();
+		this.statRunes = InitializeStructure.createStatRune2DArrayList();
+
 		chooseSumms();
 		chooseSpell();
 		generateBuild();
-		// chooseRunes();
+		chooseRunes();
 
+	}
+
+	private void chooseRunes()
+	{
+		chooseRunePage();
+		chooseStatRunes();
+	}
+
+	private void chooseRunePage()
+	{
+		RuneType type1 = runeTypes.remove(randIndex(0, runeTypes.size()));
+		RuneType type2 = runeTypes.remove(randIndex(0, runeTypes.size()));
+
+		this.runePage = new RunePage(type1, type2);
+
+		this.runePage.setKeystone(type1.getKeystones()
+				.get(randIndex(0, type1.getKeystones().size())));
+
+		List<MinorRune> mainMinors = new ArrayList<>();
+		mainMinors.add(type1.getMinorRunes().get(0)
+				.get(randIndex(0, type1.getMinorRunes().get(0).size())));
+		mainMinors.add(type1.getMinorRunes().get(1)
+				.get(randIndex(0, type1.getMinorRunes().get(1).size())));
+		mainMinors.add(type1.getMinorRunes().get(2)
+				.get(randIndex(0, type1.getMinorRunes().get(2).size())));
+
+		this.runePage.setMainMinorRunes(mainMinors);
+
+		List<MinorRune> secondaryMinors = new ArrayList<>();
+		int index1 = randIndex(0, type2.getMinorRunes().size());
+		int index2;
+		do
+		{
+			index2 = randIndex(0, type2.getMinorRunes().size());
+		}
+		while (index1 == index2);
+
+		secondaryMinors.add(type2.getMinorRunes().get(index1)
+				.get(randIndex(0, type2.getMinorRunes().get(index1).size())));
+		secondaryMinors.add(type2.getMinorRunes().get(index2)
+				.get(randIndex(0, type2.getMinorRunes().get(index2).size())));
+
+		this.runePage.setSecondaryMinorRunes(secondaryMinors);
+
+	}
+
+	private void chooseStatRunes()
+	{
+		List<StatRune> statRunes = new ArrayList<>();
+
+		statRunes.add(this.statRunes.get(0)
+				.get(randIndex(0, this.statRunes.get(0).size())));
+		statRunes.add(this.statRunes.get(1)
+				.get(randIndex(0, this.statRunes.get(1).size())));
+		statRunes.add(this.statRunes.get(2)
+				.get(randIndex(0, this.statRunes.get(2).size())));
+
+		this.runePage.setStatRunes(statRunes);
+	}
+
+	public List<Item> getBuild()
+	{
+		return this.build;
+	}
+
+	public List<SummonerSpell> getSummonerSpellsToPick()
+	{
+		return this.summsToPick;
+	}
+
+	public String getSpellToMax()
+	{
+		return this.spellToMax;
 	}
 
 	private void removeSummonerSpells()
@@ -72,31 +157,33 @@ public class Build
 					summsToRemove.add("Clarity");
 				}
 	}
-	
+
 	private void chooseSumms()
 	{
+		this.summsToPick = new ArrayList<>();
+
 		summsToPick.add(randSumSpell());
 		summsToPick.add(randSumSpell());
 	}
-	
+
 	private void chooseSpell()
 	{
 		int spellNum = randIndex(0, 3);
-		
-		switch(spellNum)
+
+		switch (spellNum)
 		{
 			case 0:
 				this.spellToMax = "qSpell";
 				break;
-			case 1: 
+			case 1:
 				this.spellToMax = "wSpell";
 				break;
 			case 2:
 				this.spellToMax = "eSpell";
+				break;
 		}
 	}
-	
-	
+
 	/**
 	 * Removes the items from the possible items for the build from the champion
 	 * and the map
@@ -172,9 +259,8 @@ public class Build
 	 * random item if champion doesn't have hex core or smite, the rest of the
 	 * items are all random
 	 * 
-	 * @return a list of the 6 randomly chosen items
 	 */
-	public List<Item> generateBuild()
+	public void generateBuild()
 	{
 		List<Item> build = new ArrayList<>();
 
@@ -185,7 +271,7 @@ public class Build
 			if (champion.getHasHexCore())
 			{
 				build.add(this.hexCore);
-				if (summSpells.contains(new SummonerSpell("Smite")))
+				if (summsToPick.contains(new SummonerSpell("Smite")))
 				{
 					build.add(randMachete());
 					build.addAll(xRandItem(3));
@@ -196,7 +282,7 @@ public class Build
 				}
 			}
 			else
-				if (summSpells.contains(new SummonerSpell("Smite")))
+				if (summsToPick.contains(new SummonerSpell("Smite")))
 				{
 					build.add(randMachete());
 					build.addAll(xRandItem(4));
@@ -207,7 +293,7 @@ public class Build
 				}
 		}
 		else
-			if (summSpells.contains(new SummonerSpell("Smite")))
+			if (summsToPick.contains(new SummonerSpell("Smite")))
 			{
 				build.add(randMachete());
 				build.addAll(xRandItem(5));
@@ -217,13 +303,13 @@ public class Build
 				build.addAll(xRandItem(6));
 			}
 
-		return build;
+		this.build = build;
 
 	}
 
 	private int randIndex(int min, int max)
 	{
-		return (int) (Math.random() * (max - min) + 1) + min;
+		return (int) (Math.random() * ((max - 1) - min) + 1) + min;
 	}
 
 	private Item randItem()
@@ -269,5 +355,23 @@ public class Build
 		SummonerSpell summ = this.summSpells.remove(index);
 
 		return summ;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Champion : " + this.champion + "\nSpell to max : "
+				+ this.spellToMax + "\nMap : " + this.map
+				+ "\n\nSummoner Spells\n-----------------------\n"
+				+ this.getSummonerSpellsToPick()
+				+ "\n\nBuild\n-----------------------\n1 : " + this.build.get(0)
+				+ "\n2 : " + this.build.get(1) + "\n3 : " + this.build.get(2)
+				+ "\n4 : " + this.build.get(3) + "\n5 : " + this.build.get(4)
+				+ "\n6 : " + this.build.get(5)
+				+ "\n\nRunes\n-----------------------\nKeystone :\n"
+				+ runePage.getKeystone() + "\nMain Minors :\n"
+				+ runePage.getMainMinorRunes() + "\nSecondary Minors :\n"
+				+ runePage.getSecondaryMinorRunes() + "\nStat Runes :\n"
+				+ runePage.getStatRunes();
 	}
 }

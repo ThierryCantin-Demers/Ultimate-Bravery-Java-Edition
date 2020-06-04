@@ -5,7 +5,7 @@ public class Item
 	/**
 	 * Path of the items' images
 	 */
-	private String PATH = "image\\items\\";
+	private String PATH = "images\\items\\";
 
 	/**
 	 * Name of the item

@@ -203,6 +203,6 @@ public class Champion
 	@Override
 	public String toString()
 	{
-		return this.name + ", " + this.rangeType + ", " + this.selected;
+		return this.name;
 	}
 }
