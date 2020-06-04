@@ -1,21 +1,17 @@
 package main;
 
-import structure.Champions;
-import structure.Items;
-import structure.Maps;
+import exceptions.ParsingException;
+import structure.Champion;
+import structure.Map;
+import structure.RangeType;
 
 public class Launcher
 {
 	
-	static Champions[] champions = InitializeStructure.createChampionsArray();
-	static Maps[] maps = InitializeStructure.createMapsArray();
-	static Items[] items = InitializeStructure.createItemsArray();
 	
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws ParsingException
 	{
-		for(Items item: items)
-		System.out.println(item);
 	}
 
 }
