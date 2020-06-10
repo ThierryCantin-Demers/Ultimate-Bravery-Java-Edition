@@ -2,7 +2,7 @@ package structure;
 
 public class MinorRune extends Rune
 {
-	private static final String PATH = "image\\runes\\minor runes\\";
+	private static final String PATH = "images\\runes\\minor runes\\";
 
 	public MinorRune(String name)
 	{

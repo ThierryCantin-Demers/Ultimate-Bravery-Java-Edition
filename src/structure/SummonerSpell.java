@@ -5,7 +5,7 @@ public class SummonerSpell
 	/**
 	 * The base path of all the summoner spells' images' path
 	 */
-	private static final String PATH = "image\\summoner spells\\";
+	private static final String PATH = "images\\summoner spells\\";
 
 	/**
 	 * The name of the summoner spell

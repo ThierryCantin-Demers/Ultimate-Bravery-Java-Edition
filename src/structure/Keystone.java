@@ -4,7 +4,7 @@ public class Keystone extends Rune
 {
 
 	
-	private static final String PATH = "image\\runes\\keystones\\";
+	private static final String PATH = "images\\runes\\keystones\\";
 	
 	public Keystone(String name)
 	{

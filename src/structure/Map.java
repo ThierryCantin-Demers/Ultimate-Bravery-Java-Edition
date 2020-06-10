@@ -7,10 +7,6 @@ public class Map
 	 */
 	private String name;
 	
-	/**
-	 * Indicated whether the map is the one that is selected
-	 */
-	private boolean selected;
 	
 	
 	/**
@@ -21,11 +17,6 @@ public class Map
 	public Map(String name)
 	{
 		this.name = name;
-		
-		if(getName().equals("Summoner's Rift"))
-			setSelected(true);
-		else
-			setSelected(false);
 	}
 	
 	
@@ -39,25 +30,6 @@ public class Map
 		return this.name;
 	}
 	
-	/**
-	 * Modifies if the map is selected or not
-	 * 
-	 * @param selected : the new value we want to give the map
-	 */
-	public void setSelected(boolean selected)
-	{
-		this.selected = selected;
-	}
-	
-	/**
-	 * Returns whether or not the map is selected
-	 * 
-	 * @return whether or not the map is selected
-	 */
-	public boolean getSelected()
-	{
-		return this.selected;
-	}
 	
 	@Override
 	public String toString()

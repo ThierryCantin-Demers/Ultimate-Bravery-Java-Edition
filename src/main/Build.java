@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import exceptions.ParsingException;
@@ -47,7 +48,7 @@ public class Build
 		this.boots = InitializeStructure.createBootsArrayList();
 		this.machetes = InitializeStructure.createMacheteArrayList();
 
-		this.summSpells = InitializeStructure.createSummonerSpellArrayList();
+		this.summSpells = Collections.synchronizedList(InitializeStructure.createSummonerSpellArrayList());
 		removeSummonerSpells();
 
 		this.runeTypes = InitializeStructure.createRuneTypeArrayList();
@@ -64,6 +65,11 @@ public class Build
 	{
 		chooseRunePage();
 		chooseStatRunes();
+	}
+	
+	public RunePage getRunePage()
+	{
+		return runePage;
 	}
 
 	private void chooseRunePage()
@@ -156,6 +162,8 @@ public class Build
 					summsToRemove.add("Mark");
 					summsToRemove.add("Clarity");
 				}
+		
+		this.summSpells.removeIf(summ -> (summsToRemove.contains(summ.getName())));
 	}
 
 	private void chooseSumms()
@@ -212,6 +220,7 @@ public class Build
 		{
 			itemsToRemove.add("Titanic Hydra");
 			itemsToRemove.add("Ravenous Hydra");
+			itemsToRemove.add("Sterak's Gage");
 		}
 		else
 			if (champion.getRangeType().equals(RangeType.MELEE))
@@ -307,9 +316,9 @@ public class Build
 
 	}
 
-	private int randIndex(int min, int max)
+	public static int randIndex(int min, int max)
 	{
-		return (int) (Math.random() * ((max - 1) - min) + 1) + min;
+		return (int) ((Math.random() * (max - min)) + min);
 	}
 
 	private Item randItem()

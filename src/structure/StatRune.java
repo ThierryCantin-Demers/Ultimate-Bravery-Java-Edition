@@ -3,7 +3,7 @@ package structure;
 public class StatRune extends Rune
 {
 	
-	private static final String PATH = "image\\runes\\stat runes\\";
+	private static final String PATH = "images\\runes\\stat runes\\";
 
 	public StatRune(String name)
 	{
