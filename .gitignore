@@ -7,7 +7,6 @@
 *.so
 *.class
 *.jardesc
-*.jar
 
 # Packages #
 ############
