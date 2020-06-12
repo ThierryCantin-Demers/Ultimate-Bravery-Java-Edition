@@ -54,8 +54,11 @@ public class Launcher extends JFrame
 	private JScrollPane championsButtonsArea;
 	private JPanel championsButtonsPanel;
 	private ButtonGroup mapsButtonsGroup;
+	private JPanel thingToInclude;
 
 	private JFrame currentFrame;
+
+	Font font = new Font("Dialog", Font.PLAIN, 20);
 
 	public static void main(String[] args) throws ParsingException, IOException
 	{
@@ -79,6 +82,17 @@ public class Launcher extends JFrame
 		championsButtonsToShow = new ArrayList<>();
 		mapsButtons = new ArrayList<>();
 
+		thingToInclude = new JPanel(new GridLayout(3, 0, 0, 0));
+		
+		JLabel thingToInclude1 = new JLabel("Ultimate Bravery - Java Edition isn't endorsed by Riot Games and doesn't reflect the views or opinions of");
+		JLabel thingToInclude2 = new JLabel("Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and");
+		JLabel thingToInclude3 = new JLabel("Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.");
+
+		
+		thingToInclude.add(thingToInclude1);
+		thingToInclude.add(thingToInclude2);
+		thingToInclude.add(thingToInclude3);
+				
 		championSelect = new JFrame("Ultimate Bravery");
 
 		championSelect.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -255,10 +269,8 @@ public class Launcher extends JFrame
 			mapsPanel.add(button);
 		}
 
-		Font font1 = new Font("Dialog", Font.PLAIN, 20);
-
 		searchBar.setText("Search champion name");
-		searchBar.setFont(font1);
+		searchBar.setFont(font);
 
 		searchBar.addKeyListener(new KeyListener()
 		{
@@ -301,6 +313,7 @@ public class Launcher extends JFrame
 
 		mapsArea.add(selectDeselectButtons, BorderLayout.WEST);
 		mapsArea.add(generateBuildButton, BorderLayout.CENTER);
+		mapsArea.add(thingToInclude, BorderLayout.SOUTH);
 
 		return mapsArea;
 
@@ -315,7 +328,7 @@ public class Launcher extends JFrame
 		splitPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
 
 		// splitPane.setDividerLocation(championSelect.getWidth() / 2);
-		splitPane.setDividerSize(0);
+		splitPane.setDividerSize(1);
 
 		setDividerLocation(splitPane, 0.5);
 		splitPane.setResizeWeight(0.5);
@@ -417,6 +430,19 @@ public class Launcher extends JFrame
 				champion.getImagePaths().get(build.getSpellToMax()));
 		JLabel spell = new JLabel(spellImage);
 
+		item1.setToolTipText("<html><p><font size=\"15\">" + build.getBuild().get(0).getName() + "</font></p></html>");
+		item2.setToolTipText("<html><p><font size=\"15\">" + build.getBuild().get(1).getName() + "</font></p></html>");
+		item3.setToolTipText("<html><p><font size=\"15\">" + build.getBuild().get(2).getName() + "</font></p></html>");
+		item4.setToolTipText("<html><p><font size=\"15\">" + build.getBuild().get(3).getName() + "</font></p></html>");
+		item5.setToolTipText("<html><p><font size=\"15\">" + build.getBuild().get(4).getName() + "</font></p></html>");
+		item6.setToolTipText("<html><p><font size=\"15\">" + build.getBuild().get(5).getName() + "</font></p></html>");
+
+		spell.setToolTipText(
+				String.valueOf(build.getSpellToMax().charAt(0)).toUpperCase());
+		
+		championLabel.setToolTipText("<html><p><font size=\"15\">" + champion.getName() + "</font></p></html>");
+		spell.setToolTipText("<html><p><font size=\"15\">" + String.valueOf(build.getSpellToMax().charAt(0)).toUpperCase() + "</font></p></html>");
+		
 		champAndSpellPanel.add(championLabel);
 		champAndSpellPanel.add(spell);
 
@@ -429,6 +455,12 @@ public class Launcher extends JFrame
 		JLabel summonerSpell2 = new JLabel(summonerSpellImage2);
 
 		JPanel summonerSpells = new JPanel();
+		
+		summonerSpell1.setToolTipText("<html><p><font size=\"15\">" + 
+				build.getSummonerSpellsToPick().get(0).getName() + "</font></p></html>");
+		summonerSpell2.setToolTipText("<html><p><font size=\"15\">" + 
+				build.getSummonerSpellsToPick().get(1).getName() + "</font></p></html>");
+		
 		summonerSpells.add(summonerSpell1);
 		summonerSpells.add(summonerSpell2);
 
@@ -455,13 +487,15 @@ public class Launcher extends JFrame
 				build.getRunePage().getMainMinorRunes().get(2).getImgPath());
 		JLabel mainRune3 = new JLabel(new ImageIcon(mainRuneImage3.getImage()
 				.getScaledInstance(64, 64, Image.SCALE_SMOOTH)));
-		
-		
-		keystone.setToolTipText(build.getRunePage().getKeystone().getName());
-		mainRune1.setToolTipText(build.getRunePage().getMainMinorRunes().get(0).getName());
-		mainRune2.setToolTipText(build.getRunePage().getMainMinorRunes().get(1).getName());
-		mainRune3.setToolTipText(build.getRunePage().getMainMinorRunes().get(2).getName());
-		
+
+		keystone.setToolTipText("<html><p><font size=\"15\">" + build.getRunePage().getKeystone().getName() + "</font></p></html>");
+		mainRune1.setToolTipText("<html><p><font size=\"15\">" + 
+				build.getRunePage().getMainMinorRunes().get(0).getName() + "</font></p></html>");
+		mainRune2.setToolTipText("<html><p><font size=\"15\">" + 
+				build.getRunePage().getMainMinorRunes().get(1).getName() + "</font></p></html>");
+		mainRune3.setToolTipText("<html><p><font size=\"15\">" + 
+				build.getRunePage().getMainMinorRunes().get(2).getName() + "</font></p></html>");
+
 		mainRunes.add(keystone);
 		mainRunes.add(mainRune1);
 		mainRunes.add(mainRune2);
@@ -484,9 +518,11 @@ public class Launcher extends JFrame
 		JLabel secondaryRune2 = new JLabel(new ImageIcon(secondaryRuneImage2
 				.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH)));
 
-		
-		
-		
+		secondaryRune1.setToolTipText("<html><p><font size=\"15\">" + 
+				build.getRunePage().getSecondaryMinorRunes().get(0).getName() + "</font></p></html>");
+		secondaryRune2.setToolTipText("<html><p><font size=\"15\">" + 
+				build.getRunePage().getSecondaryMinorRunes().get(1).getName() + "</font></p></html>");
+
 		secondaryRunes.add(secondaryRune1);
 		secondaryRunes.add(secondaryRune2);
 
@@ -506,6 +542,13 @@ public class Launcher extends JFrame
 		ImageIcon statRuneImage3 = new ImageIcon(
 				build.getRunePage().getStatRunes().get(2).getImgPath());
 		JLabel statRune3 = new JLabel(statRuneImage3);
+
+		statRune1.setToolTipText("<html><p><font size=\"15\">" + 
+				build.getRunePage().getStatRunes().get(0).getName() + "</font></p></html>");
+		statRune2.setToolTipText("<html><p><font size=\"15\">" + 
+				build.getRunePage().getStatRunes().get(1).getName() + "</font></p></html>");
+		statRune3.setToolTipText("<html><p><font size=\"15\">" + 
+				build.getRunePage().getStatRunes().get(2).getName() + "</font></p></html>");
 
 		statRunes.add(statRune1);
 		statRunes.add(statRune2);

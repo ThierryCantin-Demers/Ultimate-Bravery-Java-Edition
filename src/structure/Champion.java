@@ -98,6 +98,12 @@ public class Champion
 
 		this.imgName = getName() + "E.png";
 		imagePaths.put("eSpell", SPELL_PATH + imgName);
+		
+		if(getName().equals("Udyr"))
+		{
+			this.imgName = getName() + "R.png";
+			imagePaths.put("rSpell", SPELL_PATH + imgName);
+		}
 	}
 
 	/**

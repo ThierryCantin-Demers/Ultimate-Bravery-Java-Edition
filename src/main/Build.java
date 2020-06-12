@@ -48,7 +48,8 @@ public class Build
 		this.boots = InitializeStructure.createBootsArrayList();
 		this.machetes = InitializeStructure.createMacheteArrayList();
 
-		this.summSpells = Collections.synchronizedList(InitializeStructure.createSummonerSpellArrayList());
+		this.summSpells = Collections.synchronizedList(
+				InitializeStructure.createSummonerSpellArrayList());
 		removeSummonerSpells();
 
 		this.runeTypes = InitializeStructure.createRuneTypeArrayList();
@@ -66,7 +67,7 @@ public class Build
 		chooseRunePage();
 		chooseStatRunes();
 	}
-	
+
 	public RunePage getRunePage()
 	{
 		return runePage;
@@ -162,8 +163,9 @@ public class Build
 					summsToRemove.add("Mark");
 					summsToRemove.add("Clarity");
 				}
-		
-		this.summSpells.removeIf(summ -> (summsToRemove.contains(summ.getName())));
+
+		this.summSpells
+				.removeIf(summ -> (summsToRemove.contains(summ.getName())));
 	}
 
 	private void chooseSumms()
@@ -176,7 +178,16 @@ public class Build
 
 	private void chooseSpell()
 	{
-		int spellNum = randIndex(0, 3);
+		int spellNum = 0;
+
+		if (this.champion.getName().contentEquals("Udyr"))
+		{
+			spellNum = randIndex(0, 4);
+		}
+		else
+		{
+			spellNum = randIndex(0, 3);
+		}
 
 		switch (spellNum)
 		{
@@ -188,6 +199,9 @@ public class Build
 				break;
 			case 2:
 				this.spellToMax = "eSpell";
+				break;
+			case 3:
+				this.spellToMax = "rSpell";
 				break;
 		}
 	}
