@@ -55,6 +55,8 @@ public class Launcher extends JFrame
 	private JPanel championsButtonsPanel;
 	private ButtonGroup mapsButtonsGroup;
 	private JPanel thingToInclude;
+	
+	ImageIcon icon = new ImageIcon("images\\Ultimate Bravery Logo.png");
 
 	private JFrame currentFrame;
 
@@ -97,13 +99,7 @@ public class Launcher extends JFrame
 
 		championSelect.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JPanel panel = new JPanel();
-
-		JLabel label = new JLabel("Bonjour");
-
-		panel.add(label);
-
-		ImageIcon icon = new ImageIcon("images\\Ultimate Bravery Logo.png");
+		
 		championSelect.setIconImage(icon.getImage());
 
 		championsButtonsArea = championButtonsPanel();
@@ -231,6 +227,8 @@ public class Launcher extends JFrame
 					currentFrame.dispose();
 
 					currentFrame = buildDisplay;
+					
+					currentFrame.setIconImage(icon.getImage());
 
 					currentFrame.setSize(920, 720);
 
@@ -249,7 +247,7 @@ public class Launcher extends JFrame
 		for (Map map : maps)
 		{
 			JRadioButton button = new JRadioButton(map.getName());
-			if (i++ == 0)
+			if (i++ == 1)
 			{
 				button.setSelected(true);
 			}
@@ -601,7 +599,6 @@ public class Launcher extends JFrame
 		buildDisplay.getContentPane().add(buildPanel);
 		buildDisplay.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-		System.out.println(build);
 	}
 
 	public static void setDividerLocation(final JSplitPane splitter,
